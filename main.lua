@@ -84,7 +84,7 @@ addtables = {}
 for i=1,model:size() do
     if tostring(model:get(i)) == 'nn.ResidualDrop' then addtables[#addtables+1] = i end
 end
----- Set the deathRate (1 - survival probabilities) for all residual blocks ----
+---- Sets the deathRate (1 - survival probability) for all residual blocks  ----
 for i,block in ipairs(addtables) do
   if opt.deathMode == 'uniform' then
     model:get(block).deathRate = opt.deathRate
@@ -140,8 +140,8 @@ function main()
     local shuffle = torch.randperm(dataTrain:size())
     local batches = all_indices:index(1, shuffle:long()):long():split(opt.batchSize)
     for i=1,#batches do
-        openAllGates()    -- reset all gates to open
-        -- Randomly determine the gates to close, according to their survival probabilities
+        openAllGates()    -- resets all gates to open
+        -- Randomly determines the gates to close, according to their survival probabilities
         for i,tb in ipairs(addtables) do
           if torch.rand(1)[1] < model:get(tb).deathRate then model:get(tb).gate = false end
         end
@@ -160,16 +160,16 @@ function main()
         optim.sgd(feval, weights, sgdState)
     end
     local training_time = timer:time().real
-    -- Accounting, save and print results
+    -- Accounting, saving and printing results
     local results = {evalModel(dataValid), evalModel(dataTest)}
     all_results[sgdState.epochCounter] = results
-    -- Save the errors, these get covered up by new ones every epoch
+    -- Saves the errors. These get covered up by new ones every epoch
     torch.save(opt.resultFolder .. string.format('errors_%d_%s_%s_%.1f', opt.N, opt.dataset, opt.deathMode, opt.deathRate), all_results)
     print(string.format('Epoch %d:\t%.2f%%\t\t%.2f%%\t\t%.2f\t\t%0.0fs', 
       sgdState.epochCounter, results[1]*100, results[2]*100, training_time))
     sgdState.epochCounter = sgdState.epochCounter + 1
   end
-  -- Save the the last model, optional. Model loading feature is not available now but is easy to add
+  -- Saves the the last model, optional. Model loading feature is not available now but is easy to add
   -- torch.save(opt.resultFolder .. string.format('model_%d_%s_%s_%.1f', opt.N, opt.dataset, opt.deathMode, opt.deathRate), model)
 end
 
