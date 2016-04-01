@@ -17,7 +17,7 @@ On our machine with a TITAN X, each epoch takes about 60 seconds, and the progra
 
 Setting deathRate to 0 is equivalent to a constant depth network, so to run our baseline, enter <br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -N 18` <br/>
-On our machine with a TITAN X, each epoch takes about 75 seconds, and this baseline program ends with a test error (selected by best validation error) of __6.41%__ (see Figure 3 in the paper).
+On our machine with a TITAN X, each epoch takes about 75 seconds, and this baseline program ends with a test error (selected by best validation error) of 6.41% (see Figure 3 in the paper).
 You can run on CIFAR-100 by adding the flag `-dataset cifar100`.
 
 ### Contact
