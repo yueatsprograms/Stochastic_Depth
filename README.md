@@ -10,12 +10,12 @@ available at http://arxiv.org/abs/1603.09382v1. For now, the code reproduces the
 - CIFAR-10 and CIFAR-100 dataset in Torch format, this script https://github.com/soumith/cifar.torch should very conveniently handle it for you
 
 ### Getting Started
-This command runs the 110-layer ResNet on CIFAR-10 with stochastic depth, using linear decaying survival probabilities ending in 0.5 <br/>
+This command runs the 110-layer ResNet on CIFAR-10 with stochastic depth, using linear decaying survival probabilities ending in 0.5. <br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -N 18 -deathRate 0.5`<br/>
-the `-device` flag allows you to specify which GPU to run on. <br/>
+The `-device` flag allows you to specify which GPU to run on. <br/>
 On our machine with a TITAN X, each epoch takes about 60 seconds, and the program ends with a test error (selected by best validation error) of __5.23%__.
 
-Setting deathRate to 0 is equivalent to a constant depth network, so to run our baseline, enter <br/>
+The default deathRate is set to 0. This is equivalent to a constant depth network, so to run our baseline, enter: <br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -N 18` <br/>
 On our machine with a TITAN X, each epoch takes about 75 seconds, and this baseline program ends with a test error (selected by best validation error) of 6.41% (see Figure 3 in the paper).
 You can run on CIFAR-100 by adding the flag `-dataset cifar100`.
