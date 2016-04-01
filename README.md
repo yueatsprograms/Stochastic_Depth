@@ -13,8 +13,11 @@ available at http://arxiv.org/abs/1603.09382v1. For now, the code reproduces the
 This command runs the 110-layer ResNet on CIFAR-10 with stochastic depth, using linear decaying survival probabilities ending in 0.5 <br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -N 18 -deathRate 0.5`<br/>
 the `-device` flag allows you to specify which GPU to run on. <br/>
+On our machine with a TITAN X, each epoch takes about 60 seconds, and the program ends with a test error (selected by best validation error) of __5.23%__.
+
 Setting deathRate to 0 is equivalent to a constant depth network, so to run our baseline, enter <br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -N 18` <br/>
+On our machine with a TITAN X, each epoch takes about 75 seconds, and this baseline program ends with a test error (selected by best validation error) of __6.41%__ (see Figure 3 in the paper).
 You can run on CIFAR-100 by adding the flag `-dataset cifar100`.
 
 ### Contact
