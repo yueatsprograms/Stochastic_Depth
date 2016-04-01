@@ -37,9 +37,9 @@ dataTest = Dataset.CIFAR(all_data, all_labels, "test", opt.batchSize)
 local mean,std = dataTrain:preprocess()
 dataValid:preprocess(mean,std)
 dataTest:preprocess(mean,std)
-print("Training set size:", dataTrain:size())
-print("Validation set size:    ", dataValid:size())
-print("Test set size:    ", dataTest:size())
+print("Training set size:\t",   dataTrain:size())
+print("Validation set size:\t", dataValid:size())
+print("Test set size:\t",       dataTest:size())
 
 ---- Optimization hyperparameters ----
 sgdState = {
@@ -165,7 +165,7 @@ function main()
     all_results[sgdState.epochCounter] = results
     -- Saves the errors. These get covered up by new ones every epoch
     torch.save(opt.resultFolder .. string.format('errors_%d_%s_%s_%.1f', opt.N, opt.dataset, opt.deathMode, opt.deathRate), all_results)
-    print(string.format('Epoch %d:\t%.2f%%\t\t%.2f%%\t\t%.2f\t\t%0.0fs', 
+    print(string.format('Epoch %d:\t%.2f%%\t\t%.2f%%\t\t%0.0fs', 
       sgdState.epochCounter, results[1]*100, results[2]*100, training_time))
     sgdState.epochCounter = sgdState.epochCounter + 1
   end
