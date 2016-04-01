@@ -17,7 +17,7 @@ The default deathRate is set to 0. This is equivalent to a constant depth networ
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save` <br/>
 On our machine with a TITAN X, each epoch takes about 75 seconds, and this baseline program ends with a test error (selected by best validation error) of 6.41% (see Figure 3 in the paper).
 
-You can run on CIFAR-100 by adding the flag `-dataset cifar100`. Our program provides other options, for example, your network depth (`-N`), data augmentation (`-augmentation`), batch size (`-batchSize`) etc. You can change the optimization hyperparameters in the sgdState variable, and learning rate schedule in the the main function. The program saves a file to `resultFolder`/errors_`N`_`dataset`_`deathMode`_`deathRate`, which is a table of `nEpochs` many tuples, each containing your test and validation error at the end of that epoch.
+You can run on CIFAR-100 by adding the flag `-dataset cifar100`. Our program provides other options, for example, your network depth (`-N`), data augmentation (`-augmentation`), batch size (`-batchSize`) etc. You can change the optimization hyperparameters in the sgdState variable, and learning rate schedule in the the main function. The program saves a file to `resultFolder`/errors\_`N`\_`dataset`\_`deathMode`\_`deathRate`, which is a table of `nEpochs` many tuples, each containing your test and validation error at the end of that epoch.
 
 ### Contact
 My email is ys646 at cornell.edu. I'm happy to answer any of your question, and I'd very much appreciate your suggestions. 
