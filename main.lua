@@ -21,8 +21,8 @@ opt = lapp[[
       --deathRate     (default 0)           1-p_L for lin_decay, 1-p_l for uniform, 0 is constant depth
       --device        (default 0)           Which GPU to run on, 0-based indexing
       --augmentation  (default true)        Standard data augmentation, true or false
-      --resultFolder (default "/scratch/ys646/")
-      --dataRoot     (default "/scratch/datasets/cifar.torch/")
+      --resultFolder  (default "")          Path to the folder where you'd like to save results
+      --dataRoot      (default "")          Path to data (e.g. contains cifar10-train.t7)
 ]]
 print(opt)
 cutorch.setDevice(opt.device+1)   -- torch uses 1-based indexing for GPU, so +1
@@ -123,7 +123,7 @@ all_results = {}  -- contains test and validation error throughout training
 function main()  
   local weights, gradients = model:getParameters()
   sgdState.epochCounter  = 1
-  print('Training...\nEpoch\tValid. err\tTest err\tTraining loss\tTraining time')
+  print('Training...\nEpoch\tValid. err\tTest err\tTraining time')
   local all_indices = torch.range(1, dataTrain:size())
   while sgdState.epochCounter <= opt.maxEpochs do
     -- Learning rate schedule
@@ -152,7 +152,7 @@ function main()
             inputs = inputs:cuda()
             labels = labels:cuda()
             local y = model:forward(inputs)
-            loss_val = loss:forward(y, labels)
+            local loss_val = loss:forward(y, labels)
             local dl_df = loss:backward(y, labels)
             model:backward(inputs, dl_df)
             return loss_val, gradients
@@ -161,15 +161,15 @@ function main()
     end
     local training_time = timer:time().real
     -- Accounting, save and print results
-    local results = {evalModel(dataValid), evalModel(dataTest), loss_val}
+    local results = {evalModel(dataValid), evalModel(dataTest)}
     all_results[sgdState.epochCounter] = results
     -- Save the errors, these get covered up by new ones every epoch
     torch.save(opt.resultFolder .. string.format('errors_%d_%s_%s_%.1f', opt.N, opt.dataset, opt.deathMode, opt.deathRate), all_results)
     print(string.format('Epoch %d:\t%.2f%%\t\t%.2f%%\t\t%.2f\t\t%0.0fs', 
-      sgdState.epochCounter, results[1]*100, results[2]*100, results[3], training_time))
+      sgdState.epochCounter, results[1]*100, results[2]*100, training_time))
     sgdState.epochCounter = sgdState.epochCounter + 1
   end
-  -- Save the model, optional. Model loading feature is not available now but is easy to add
+  -- Save the the last model, optional. Model loading feature is not available now but is easy to add
   -- torch.save(opt.resultFolder .. string.format('model_%d_%s_%s_%.1f', opt.N, opt.dataset, opt.deathMode, opt.deathRate), model)
 end
 
