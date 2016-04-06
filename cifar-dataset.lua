@@ -2,7 +2,7 @@ path = require 'pl.path'
 require 'image'
 
 Dataset = {}
-local CIFAR, parent = torch.class("Dataset.CIFAR")
+local CIFAR, parent = torch.class("Dataset.LOADER")
 
 function get_Data(dataset, path, do_shuffling)
    local data = torch.Tensor(60000, 3, 32, 32)
