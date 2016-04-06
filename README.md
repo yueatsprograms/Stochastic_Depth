@@ -1,7 +1,7 @@
 Deep Networks with Stochastic Depth
 ====================
 This repository hosts the Torch 7 code for the paper _Deep Networks with Stochastic Depth_
-available at http://arxiv.org/abs/1603.09382. For now, the code reproduces the results in Figure 3 for CIFAR-10 and CIFAR-100, and Figure 4 left for SVHN. The code for the 1202-layer network on CIFAR-10 (which requires some memory optimization) will be available very soon.
+available at http://arxiv.org/abs/1603.09382. For now, the code reproduces the results in Figure 3 for CIFAR-10 and CIFAR-100, and Figure 4 left for SVHN. The code for the 1202-layer network on CIFAR-10 (which requires some memory optimization) in Figure 4 right will be available very soon.
 
 ### Prerequisites
 - Torch 7 and CUDA with the basic packages (nn, optim, image, cutorch, cunn).
@@ -24,7 +24,7 @@ th main.lua -dataRoot cifar.torch/ -resultFolder results/ -deathRate 0.5
 
 ### Usage Details
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -deathRate 0.5`<br/>
-This command runs the 110-layer ResNet on CIFAR-10 with stochastic depth, using linear decaying survival probabilities ending in 0.5. The `-device` flag allows you to specify which GPU to run on. On our machine with a TITAN X, each epoch takes about 60 seconds, and the program ends with a test error (selected by best validation error) of __5.23%__.
+This command runs the 110-layer ResNet on CIFAR-10 with stochastic depth, using _linear decay_ survival probabilities ending in 0.5. The `-device` flag allows you to specify which GPU to run on. On our machine with a TITAN X, each epoch takes about 60 seconds, and the program ends with a test error (selected by best validation error) of __5.23%__.
 
 The default deathRate is set to 0. This is equivalent to a constant depth network, so to run our baseline, enter: <br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save` <br/>
