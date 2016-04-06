@@ -62,8 +62,7 @@ model = nn.Sequential()
 model:add(cudnn.SpatialConvolution(3, 16, 3,3, 1,1, 1,1)
             :init('weight', nninit.kaiming, {gain = 'relu'})
             :init('bias', nninit.constant, 0))
-model:add(cudnn.SpatialBatchNormalization(16))--:init('weight', nninit.normal, 1.0, 0.002)
-                                              --:init('bias', nninit.constant, 0))
+model:add(cudnn.SpatialBatchNormalization(16))
 model:add(cudnn.ReLU(true))
 ------> 16, 32,32   First Group
 for i=1,opt.N do   addResidualDrop(model, nil, 16)   end
