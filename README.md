@@ -39,7 +39,7 @@ On our machine with a TITAN X, each epoch takes about 75 seconds, and this basel
 
 You can run on CIFAR-100 by adding the flag `-dataset cifar100`. Our program provides other options, for example, your network depth (`-N`), data augmentation (`-augmentation`), batch size (`-batchSize`) etc. You can change the optimization hyperparameters in the sgdState variable, and learning rate schedule in the the main function. The program saves a file every epoch to `resultFolder`/errors\_`N`\_`dataset`\_`deathMode`\_`deathRate`, which has a table of tuples containing your test and validation errors until that epoch.
 
-The architecture and number of epochs for SVHN used in our paper is slightly different, please use the following command:<br/>
+The architecture and number of epochs for SVHN used in our paper are slightly different from the code's default, please use the following command if you would like to replicate our result of 1.75% on SVHN:<br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -dataset svhn -N 25 -maxEpochs 50 -deathRate 0.5`
 
 ### Known Problems
