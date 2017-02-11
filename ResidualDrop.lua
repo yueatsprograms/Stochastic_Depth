@@ -29,7 +29,7 @@ function ResidualDrop:__init(deathRate, nChannels, nOutChannels, stride)
     self.skip:add(nn.Identity())
     if stride > 1 then
        -- optional downsampling
-       self.skip:add(nn.SpatialAveragePooling(1, 1, stride,stride))
+       self.skip:add(nn.SpatialAveragePooling(stride, stride, stride,stride))
     end
     if nOutChannels > nChannels then
        -- optional padding, this is option A in their paper
