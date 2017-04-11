@@ -4,18 +4,22 @@ This repository hosts the Torch 7 code for the paper _Deep Networks with Stochas
 available at http://arxiv.org/abs/1603.09382. For now, the code reproduces the results in Figure 3 for CIFAR-10 and CIFAR-100, and Figure 4 left for SVHN. The code for the 1202-layer network is easily modified from the repo `fb.resnet.torch` using our provided module for stochastic depth.
 
 ### Table of Contents
+- [Updates](#updates)  
 - [Prerequisites](#prerequisites)  
 - [Getting Started on CIFAR-10](#getting-started-on-cifar-10)  
 - [Usage Details](#usage-details)  
 - [Known Problems](#known-problems) 
 - [Contact](#contact)  
 
+### Updates
+Please see the [latest implementation](https://github.com/felixgwu/img_classification_pk_pytorch) of stochastic depth and other cool models (DenseNet etc.) in PyTorch, by Felix Wu and Danlu Chen. Their code is much more memory efficient, more user friendly and better maintained. The 1202-layer architecture on CIFAR-10 can be trained on one TITAN X (amazingly!) under our standard settings.
+
 ### Prerequisites
 - Torch 7 and CUDA with the basic packages (nn, optim, image, cutorch, cunn).
-- cudnn (https://developer.nvidia.com/cudnn) and torch bindings (https://github.com/soumith/cudnn.torch).
-- nninit torch package (https://github.com/Kaixhin/nninit); `luarocks install nninit` should do the trick.
-- CIFAR-10 and CIFAR-100 datasets in Torch format; this script https://github.com/soumith/cifar.torch should very conveniently handle it for you.
-- SVHN dataset in Torch format, available at this website http://torch7.s3-website-us-east-1.amazonaws.com/data/svhn.t7.tgz. Please note that running on SVHN requires roughly 28GB of RAM for dataset loading.
+- [cudnn](https://developer.nvidia.com/cudnn) and [torch bindings](https://github.com/soumith/cudnn.torch).
+- [nninit](https://github.com/Kaixhin/nninit); `luarocks install nninit` should do the trick.
+- CIFAR-10 and CIFAR-100 datasets in Torch format; [this script](https://github.com/soumith/cifar.torch) should very conveniently handle it for you.
+- SVHN dataset in Torch format, available [here](http://torch7.s3-website-us-east-1.amazonaws.com/data/svhn.t7.tgz). Please note that running on SVHN requires roughly 28GB of RAM for dataset loading.
 
 ### Getting Started on CIFAR-10
 ```bash
