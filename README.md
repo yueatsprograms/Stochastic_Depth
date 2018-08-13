@@ -41,7 +41,7 @@ The default deathRate is set to 0. This is equivalent to a constant depth networ
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save` <br/>
 On our machine with a TITAN X, each epoch takes about 75 seconds, and this baseline program ends with a test error (selected by best validation error) of 6.41% (see Figure 3 in the paper).
 
-You can run on CIFAR-100 by adding the flag `-dataset cifar100`. Our program provides other options, for example, your network depth (`-N`), data augmentation (`-augmentation`), batch size (`-batchSize`) etc. You can change the optimization hyperparameters in the sgdState variable, and learning rate schedule in the the main function. The program saves a file every epoch to `resultFolder`/errors\_`N`\_`dataset`\_`deathMode`\_`deathRate`, which has a table of tuples containing your test and validation errors until that epoch.
+You can run on CIFAR-100 by adding the flag `-dataset cifar100`. Our program provides other options, for example, your network depth (`-N`), data augmentation (`-augmentation`), batch size (`-batchSize`) etc. You can change the optimization hyperparameters in the sgdState variable, and learning rate schedule in the main function. The program saves a file every epoch to `resultFolder`/errors\_`N`\_`dataset`\_`deathMode`\_`deathRate`, which has a table of tuples containing your test and validation errors until that epoch.
 
 The architecture and number of epochs for SVHN used in our paper are slightly different from the code's default, please use the following command if you would like to replicate our result of 1.75% on SVHN:<br/>
 `th main.lua -dataRoot path_to_data -resultFolder path_to_save -dataset svhn -N 25 -maxEpochs 50 -deathRate 0.5`
